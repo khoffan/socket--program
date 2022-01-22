@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My C/S test</title>
+</head>
+
+<body>
+    <ul id="password"></ul>
+    <from id="from">
+        <input id="in-password" ,type="text" ,name="">
+        <button id="button">Genaretor</button>
+        <dic>
+            <p id="result",type="text"></p>
+        </dic>
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        /*var result = document.getElementById('result')
+        function getpassword() {
+            var char = "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(){}[]?/><ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            var passwordlen = 16;
+            var password = ""
+            for (i <= 0; i < passwordlen; i++) {
+                var randomNumber = Math.floor(Math.random() * char.length)
+                password += char.substring(randomNumber, randomNumber + 1)
+            }
+            result.innerHTML = password;
+        }*/
+        var from = document.getElementById('from');
+        var buuton = document.getElementById("button");
+        var inpassword = document.getElementById("in-password");
+        var password = document.getElementById('password');
+        button.addEventListener('click',function(e) {
+            e.preventDefault();
+
+            if (inpassword.value){
+                socket.emit("new password",inpassword.value);
+                inpassword.value = ""
+            }
+        })
+        // ส่วนแสดงผลที่ได้ค่าจาก server
+        socket.on("password", msg=>{
+            var result = document.getElementById('result');
+            console.log(msg)
+            result.innerHTML = msg;
+        })
+    </script>
+</body>
+
+</html>
